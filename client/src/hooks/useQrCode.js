@@ -1,5 +1,5 @@
 import { useState } from "react"
-import isValidUrl from "../utils/isValidUrl"
+import validator from 'validator'
 
 export function UseQrCode ({ initialUrl }) {
   const [url, setUrl] = useState(initialUrl)
@@ -7,8 +7,10 @@ export function UseQrCode ({ initialUrl }) {
   const [qrCodeName, setQrCodeName ] = useState(null)
   const [error, setError] = useState('')
 
+   // Generate QR code function
   const generateQrCode = async () => {
-    if(!isValidUrl(url)){
+    // Validate url format
+    if(!validator.isURL(url,{ allow_query_components: true})){
       setError('Please, introduce a valid Url')
       return 
     }
@@ -19,12 +21,14 @@ export function UseQrCode ({ initialUrl }) {
         body: JSON.stringify({ url })
     }
   
+    // Fetch QR code from server
     fetch('http://localhost:3000/createQrImage', fetchOptions)
       .then(res => res.json())
       .then(data => {
         if(data.error) {
           throw new Error(data.error)
         }
+        // Update states with new QR code data
         setQrCodeName(data.imageName)
         setPrevUrl(url)
         setError('')
@@ -33,6 +37,7 @@ export function UseQrCode ({ initialUrl }) {
         setError(e.message)
       })
   } 
-
+  
+  // Return state values and functions for consumption
   return { url, prevUrl, qrCodeName, setUrl, generateQrCode, error, setError }
 }
