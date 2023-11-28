@@ -1,6 +1,8 @@
 import { useState } from "react"
 import validator from 'validator'
 
+import { APP_URL } from './utils/const'
+
 export function UseQrCode ({ initialUrl }) {
   const [url, setUrl] = useState(initialUrl)
   const [prevUrl, setPrevUrl] = useState(url)
@@ -22,7 +24,7 @@ export function UseQrCode ({ initialUrl }) {
     }
   
     // Fetch QR code from server
-    fetch('http://localhost:3000/createQrImage', fetchOptions)
+    fetch(`${APP_URL}/createQrImage`, fetchOptions)
       .then(res => res.json())
       .then(data => {
         if(data.error) {

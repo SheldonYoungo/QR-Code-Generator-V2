@@ -1,0 +1,1 @@
+export const SERVER_URL = proccess.env.URL || "http://localhost:3000"
