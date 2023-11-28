@@ -6,7 +6,7 @@ import './App.css'
 import { Form } from './components/Form.component'
 
 import { UseQrCode } from './hooks/useQrCode'
-import { APP_URL } from './utils/const'
+import { SERVER_URL } from './utils/const'
 
 function App() {
   const { url, prevUrl, error, setError, setUrl, generateQrCode, qrCodeName } = UseQrCode('')
@@ -22,7 +22,7 @@ function App() {
 
   const handleDownload = () => {
     event.preventDefault()
-    fetch(`${APP_URL}/download/${qrCodeName}`)
+    fetch(`${SERVER_URL}/download/${qrCodeName}`)
       .then(res => res.blob())
       .then(blob => saveAs(blob, qrCodeName))
   }
