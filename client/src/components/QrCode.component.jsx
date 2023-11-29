@@ -1,7 +1,9 @@
+import { SERVER_URL } from "../utils/const";
+
 export function QrCode({imgName}) {
   return (
     <>
-      <img src={`http://localhost:3000/qr-codes/${imgName}`} />
+      <img src={`${SERVER_URL}/qr-codes/${imgName}`} />
     </>
   )
 }
