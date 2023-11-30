@@ -26,10 +26,10 @@ function createQrImage(url) {
   const qrImageFileName = `${domain}_qr_code.png`
 
   // Set QR image location
-  const qrImageLocation = path.join(__dirname, 'public', 'qr-codes', qrImageFileName)
+  const qrImageLocation = path.join(__dirname, '../public', 'qr-codes', qrImageFileName)
 
   // Delete old QR codes with similar names
-  deleteFilesWithNamesContaining('/public/qr-codes/', urlExtentions)
+  deleteFilesWithNamesContaining(path.join(__dirname, '../public', 'qr-codes'), urlExtentions)
 
   // Write QR code image to file location
   qrCode.pipe(fs.createWriteStream(qrImageLocation))
