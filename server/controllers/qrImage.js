@@ -14,11 +14,21 @@ exports.show = (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'qr-codes', qrCodeName))
 }
 
+let prevUrl = null //Sets the previous url
 exports.create = (req, res) => {
   const url = req.body.url
+
+  if (prevUrl === url) {
+    let domain = new URL(url).hostname
+    domain = domain.substring(domain.lastIndexOf('.', domain.lastIndexOf('.') - 1) + 1)
+    return res.json({ imageName: domain + '_qr_code.png' })
+  }
+
   try {
     const imageName = createQrImage(url)
     
+    prevUrl = url
+
     res.json({ imageName })
   } catch (e) {
     res.status(500).json({ error: 'We got problems proccesing your url. Please make sure you have inserted the url correctly' })

@@ -47,6 +47,7 @@ function deleteFilesWithNamesContaining(directoryPath, extensions = []) {
 
     // Iterate over files in the directory
     for (const file of files) {
+      if (fs.existsSync(file)) return
       // Verifies if the file name extension matches one of the extensions
       if (extensions.some(namePart => file.includes(namePart))) {
         // Elimina el archivo
