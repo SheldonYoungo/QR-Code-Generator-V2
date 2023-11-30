@@ -1,9 +1,27 @@
-import { SERVER_URL } from "../utils/const";
+import { useState, useEffect } from 'react'
+import saveAs from 'file-saver'
 
-export function QrCode({imgName}) {
-  return (
+import { SERVER_URL } from "../utils/const"
+
+export function QrCode({ imgName }) {
+ const handleDownload = () => {
+  event.preventDefault()
+  fetch(`${SERVER_URL}/download/${imgName}`)
+    .then(res => res.blob())
+    .then(blob => saveAs(blob, imgName))
+ }
+
+ return (
     <>
-      <img src={`${SERVER_URL}/qr-codes/${imgName}`} />
+      <div>
+        <img
+          src={`${SERVER_URL}/qr-codes/${imgName}`}
+          alt="QR Code"
+        />
+        <br></br>
+        <button className='download-btn' onClick={handleDownload}>Descargar</button>
+      </div>
+
     </>
-  )
+ )
 }
