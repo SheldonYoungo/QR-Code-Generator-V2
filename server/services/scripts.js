@@ -37,7 +37,10 @@ function createQrImage(url) {
   return qrImageFileName
 }
 
-function deleteFilesWithNamesContaining (directoryPath, extensions = []) {
+function deleteFilesWithNamesContaining(directoryPath, extensions = []) {
+  if (!fs.existsSync(directoryPath)) {
+    fs.mkdirSync(directoryPath)
+  }
   // Reads directory content
   fs.readdir(directoryPath, (err, files) => {
     if (err) throw err
