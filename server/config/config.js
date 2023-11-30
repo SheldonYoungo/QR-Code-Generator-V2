@@ -10,7 +10,9 @@ app.set('PORT', process.env.PORT || 3000)
 
 // MIDDLEWARES
 app.disable('x-powered-by')
-app.use(cors())
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:5173/'
+}))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static('public'))
 app.use(express.static('dist'))
