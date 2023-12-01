@@ -9,6 +9,7 @@ The QR Code Generator is a user-friendly React app that simplifies generating QR
 - dotenv: ^16.3.1
 - qr-image: ^3.2.0
 - nodemon: ^3.0.1
+- react-progressive-graceful-image: ^0.7.0
 
 ### Client:
 - file-saver: ^2.0.5
@@ -20,18 +21,25 @@ The QR Code Generator is a user-friendly React app that simplifies generating QR
 ## Initialization:
 1.- Open the terminal, go to the server and install its dependencies, do the same thing with the client.
 
-2.- Inside the client folder run the command to build the web site:
-```
-npm run build
-```
-3.- Now copy the recently created folder called 'dist' and paste it inside the server folder.
-
-4.- Finally go to the server and here you have two options:
- - Runnign server in dev mode:
+2.- First run the server:
+ - Running server in dev mode:
     ```
      npm run dev
     ```
-- Running server in build mode:
+- Running server in production mode:
     ```
      npm run server
     ```
+3.- First run the client:
+ - Running client in dev mode:
+    ```
+     npm run dev
+    ```
+- Running client in production mode:
+    ```
+     npm run build
+     npm run preview
+    ```
+
+###Important Note: 
+It is necessary to have both the server and the client running for the application to work.
