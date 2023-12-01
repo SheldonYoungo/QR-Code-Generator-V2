@@ -1,10 +1,10 @@
-import { useState } from 'react'
 import saveAs from 'file-saver'
+import ProgressiveImage from 'react-progressive-graceful-image'
 
 import { SERVER_URL } from "../utils/const"
 
 export function QrCode({ imgName }) {
-  const [isLoading, setIsLoading] = useState(true)
+  const ImageSrc = `${SERVER_URL}/qr-codes/${imgName}`
 
  const handleDownload = () => {
   event.preventDefault()
@@ -13,20 +13,17 @@ export function QrCode({ imgName }) {
     .then(blob => saveAs(blob, imgName))
  }
 
- const handleImageLoad = () => {
-  setIsLoading(false);
-}
-
  return (
     <>
       <div>
 
-        {isLoading && <h3>Creating image...</h3>}
-        <img
-          src={`${SERVER_URL}/qr-codes/${imgName}`}
-          alt="QR Code"
-          onLoad={handleImageLoad}
-        />
+        <ProgressiveImage src={ImageSrc} placeholder='QR-Code'>
+          {(src, loading) => (
+            loading 
+            ? (<h3>Creating code...</h3>)
+            : (<img src={src} width='300' height='300'></img>)
+          )}
+        </ProgressiveImage>
         <br></br>
         <button className='download-btn' onClick={handleDownload}>Descargar</button>
       </div>
