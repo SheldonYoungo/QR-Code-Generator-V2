@@ -41,5 +41,5 @@ The QR Code Generator is a user-friendly React app that simplifies generating QR
      npm run preview
     ```
 
-###Important Note: 
+### Important Note: 
 It is necessary to have both the server and the client running for the application to work.
